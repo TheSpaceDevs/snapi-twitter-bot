@@ -8,7 +8,7 @@ export interface ITweet {
 }
 
 @Entity()
-// @Unique(["url"])
+@Unique(["title", "url"])
 export class Tweet implements ITweet{
     @PrimaryGeneratedColumn()
     id?: number
