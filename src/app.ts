@@ -5,7 +5,7 @@ import { createConnection, getRepository } from "typeorm";
 
 import { Tweet } from "./entity/Tweet";
 import { NewsSite } from "./entity/NewsSite";
-import { handleArticles } from "./handlers/handleArticles";
+import { handleMessage } from "./handlers/handleMessage";
 import newsSitesJson from "./news_sites.json";
 
 // Create a main function so we can use async/await
@@ -43,7 +43,7 @@ async function main() {
       json: true,
       setup: (channel: ConfirmChannel) => {
         channel.consume("twitter.articles", (message) =>
-          handleArticles(message, channelWrapper)
+          handleMessage(message, channelWrapper)
         );
       },
     });

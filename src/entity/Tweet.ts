@@ -34,6 +34,12 @@ export class Tweet implements ITweet {
   @UpdateDateColumn()
   updatedAt!: Date; // Using the postfix (!) since the decorator will set it
 
+  // constructor(title: string, newsSite: NewsSite, url: string) {
+  //   this.title = title;
+  //   this.newsSite = newsSite;
+  //   this.url = url;
+  // }
+
   constructor(title: string, newsSite: NewsSite, url: string) {
     this.title = title;
     this.newsSite = newsSite;

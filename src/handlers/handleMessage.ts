@@ -7,9 +7,8 @@ import { twitterClient } from "../models/TwitterClient";
 import { Message } from "../models/Message";
 import { Tweet } from "../entity/Tweet";
 import { NewsSite } from "../entity/NewsSite";
-import { log } from "util";
 
-export const handleArticles = async (
+export const handleMessage = async (
   message: ConsumeMessage | null,
   channel: ChannelWrapper
 ): Promise<void> => {
