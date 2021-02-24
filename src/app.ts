@@ -20,7 +20,7 @@ async function main() {
       logging: false,
     });
 
-    // Setup a newsRepository to handle news stuff
+    // Setup a newsRepository to handle news stuff here
     let newsSiteRepository = getRepository(NewsSite);
 
     // Import all sites from newsSites.json. This was dumped from the Spaceflight News API database

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "amqp-connection-manager": "^3.2.2",
+    "class-validator": "^0.13.1",
     "dotenv": "^8.2.0",
     "prettier": "^2.2.1",
     "reflect-metadata": "^0.1.13",
