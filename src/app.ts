@@ -26,7 +26,7 @@ async function main() {
 
     //
 
-    // Import all sites from newsSites.json. This was dumped from the SNAPI database
+    // Import all sites from newsSites.json. This was dumped from the Spaceflight News API database
     for (const entry of newsSitesJson) {
       const site = await newsSiteRepository.findOne({newsSiteId: entry._id['$oid']})
       if (!site) {
@@ -37,11 +37,9 @@ async function main() {
     }
 
     // Connect to the broker
-    const connection = amqp.connect([
-      process.env.AMQP_URL ?? '',
-    ]);
+    const connection = amqp.connect([process.env.AMQP_URL ?? '']);
 
-    // Make a connection to the channel and add listeners
+    // Create a channel and add listeners
     const channelWrapper = connection.createChannel({
       json: true,
       setup: (channel: ConfirmChannel) => {
@@ -56,7 +54,9 @@ async function main() {
 
         // Check if we already have this message, based on the title
         const tweet = await tweetRepository.findOne({title: msg.title})
+
         if (!tweet) {
+          // We need to get the news site that's needed to pass to the tweet entity
           const newsSite = await newsSiteRepository.findOne({newsSiteId: msg.newsSite})
 
           if (newsSite) {
@@ -65,14 +65,15 @@ async function main() {
             // Send tweet to Twitter
             twitterClient.sendTweet('article', newTweet.title, newTweet.newsSite.name, newTweet.url)
 
-            // Save tweet to the database
+            // Save tweet to the database and ack the message to the broker
             await tweetRepository.save(newTweet);
-
-            // console.log(`Saved: ${newTweet.title} to the database`);
+            console.log(`Saved: ${newTweet.title} to the database`);
             // channelWrapper.ack(message);
           }
         }
 
+        // If we get here, that means the tweet was already found in the database, so we can delete the message
+        channelWrapper.ack(message);
       }
     };
   } catch (e) {
@@ -81,4 +82,4 @@ async function main() {
 }
 
 // Run the app
-main();
+main().then();

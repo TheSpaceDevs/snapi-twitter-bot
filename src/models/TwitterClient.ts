@@ -8,10 +8,6 @@ class TwitterClient {
         access_token_secret: process.env.ACCESS_TOKEN_SECRET ?? ''
     })
 
-    getTweetsFromTimeline(): Promise<any> {
-        return this.client.get('statuses/user_timeline', {screen_name: 'the_snapi'})
-    }
-
     sendTweet(type: string, title: string, newsSite: string, url: string): void {
         const tweetText = `New ${type} from ${newsSite}: ${title} - ${url} #space #spaceflight #news`;
         // return this.client.post('statuses/update', {status: tweetText})
