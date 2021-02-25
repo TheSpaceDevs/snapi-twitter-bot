@@ -1,7 +1,6 @@
 import { ConsumeMessage } from "amqplib";
 import { ChannelWrapper } from "amqp-connection-manager";
 import { getRepository } from "typeorm";
-import { validate } from "class-validator";
 
 import { twitterClient } from "../models/TwitterClient";
 import { Message } from "../models/Message";
