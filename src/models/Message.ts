@@ -1,22 +1,45 @@
-import { IsDate, IsDefined, IsUrl } from "class-validator";
+import {
+  IsDate,
+  IsDefined,
+  IsUrl,
+  validate,
+  ValidationError,
+} from "class-validator";
+import { ConsumeMessage } from "amqplib";
 
+// Takes the raw amqp message and sets the fields we need later in the app.
+// Exposes a validate() method to validate that all fields are correctly set.
 export class Message {
   @IsDefined()
-  title: string;
+  title: string = "";
 
   @IsUrl()
-  url: string;
+  url: string = "";
 
   @IsDefined()
-  newsSite: string;
+  newsSite: string = "";
 
   @IsDate()
-  publishedAt: Date;
+  publishedAt: Date = new Date();
 
-  constructor(rawMessage: any) {
-    this.title = rawMessage.title;
-    this.url = rawMessage.url;
-    this.newsSite = rawMessage.newsSite;
-    this.publishedAt = new Date(rawMessage.publishedAt);
+  validationErrors: ValidationError[] | undefined;
+
+  constructor(message: ConsumeMessage | null) {
+    if (message) {
+      const msg = JSON.parse(message.content.toString());
+
+      this.title = msg.title;
+      this.url = msg.url;
+      this.newsSite = msg.newsSite;
+      this.publishedAt = new Date(msg.publishedAt);
+    }
+  }
+
+  async validate(): Promise<boolean> {
+    const validation = await validate(this);
+
+    this.validationErrors = validation;
+
+    return validation.length === 0;
   }
 }

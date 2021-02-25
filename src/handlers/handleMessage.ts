@@ -15,16 +15,10 @@ export const handleMessage = async (
   let tweetRepository = getRepository(Tweet);
   let newsSiteRepository = getRepository(NewsSite);
 
-  if (message) {
-    const msg = new Message(JSON.parse(message.content.toString()));
+  const msg = new Message(message);
+  const validMessage = await msg.validate();
 
-    // Making sure we're working with a valid message
-    const messageValidation = await validate(msg);
-
-    if (messageValidation.length !== 0) {
-      return console.error(messageValidation);
-    }
-
+  if (validMessage) {
     // Check if we already have this message, based on the title
     const tweet = await tweetRepository.findOne({ title: msg.title });
 
@@ -47,12 +41,15 @@ export const handleMessage = async (
 
         // Save tweet to the database and ack the message to the broker
         // await tweetRepository.save(newTweet);
-        console.log(`Saved: ${newTweet.title} to the database`);
+        console.log(`Saved: "${newTweet.title}" to the database 👍`);
         // channel.ack(message);
       }
     }
 
     // If we get here, that means the tweet was already found in the database, so we can delete the message
     // channel.ack(message);
+  } else {
+    // We get here if the message didn't validate for some reason
+    console.error(msg.validationErrors);
   }
 };
