@@ -52,5 +52,5 @@ async function main() {
   }
 }
 
-// Run the app - .then() since it's a Promise, and don't want errors on my IDE ¯\_(ツ)_/¯
+// Run the app - Adding .then() since it's a Promise, and I don't want errors/warnings in my IDE ¯\_(ツ)_/¯
 main().then();
