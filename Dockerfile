@@ -1,4 +1,5 @@
 FROM node:15
+LABEL org.opencontainers.image.source https://github.com/spaceflightnewsapi/snapi-twitter-bot
 
 WORKDIR /usr/src/app
 
