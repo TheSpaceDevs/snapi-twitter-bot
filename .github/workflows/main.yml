@@ -34,4 +34,3 @@ jobs:
           push: true
           tags: |
             ghcr.io/spaceflightnewsapi/twitter-bot:latest
-            ghcr.io/spaceflightnewsapi/twitter-bot:${{ steps.package-version.outputs.current-version}}
