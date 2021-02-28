@@ -33,4 +33,4 @@ jobs:
         with:
           push: true
           tags: |
-            ghcr.io/spaceflightnewsapi/twitter-bot:latest
+            ghcr.io/spaceflightnewsapi/snapi-twitter-bot:latest
