@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon -r dotenv/config src/app.ts",
     "start": "node -r dotenv/config dist/app.js",
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && npx tsc"
   },
   "keywords": [],
   "author": "",
