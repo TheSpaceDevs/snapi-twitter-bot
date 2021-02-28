@@ -1,7 +1,7 @@
 {
-  "name": "twitter-demo",
-  "version": "1.0.0",
-  "description": "",
+  "name": "snapi-twitter-bot",
+  "version": "1.0.0-beta",
+  "description": "The official Twitter bot for the Spaceflight News API.",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon -r dotenv/config src/app.ts",
