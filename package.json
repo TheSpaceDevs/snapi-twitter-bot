@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon -r dotenv/config src/app.ts",
-    "start": "node -r dotenv/config dist/app.js"
+    "start": "node -r dotenv/config dist/app.js",
+    "build": "rimraf dist && tsc"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
     "dotenv": "^8.2.0",
     "prettier": "^2.2.1",
     "reflect-metadata": "^0.1.13",
+    "rimraf": "^2.7.1",
     "sqlite3": "^5.0.2",
     "twitter": "^1.7.1",
     "typeorm": "^0.2.31"
