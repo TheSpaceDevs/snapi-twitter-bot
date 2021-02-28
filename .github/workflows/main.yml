@@ -24,8 +24,6 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
-        with:
-          path: snapi-twitter-bot
 
       - name: Build and push
         id: docker_build
