@@ -5,7 +5,7 @@ import { createConnection, getRepository } from "typeorm";
 
 import { Tweet } from "./entity/Tweet";
 import { NewsSite } from "./entity/NewsSite";
-import { handleMessage } from "./handlers/handleMessage";
+import { ArticleTypes, handleMessage } from "./handlers/handleMessage";
 import newsSitesJson from "./news_sites.json";
 
 // Create a main function so we can use async/await
@@ -14,7 +14,9 @@ async function main() {
     // Connect to the database
     await createConnection({
       type: "sqlite",
-      database: "./database.db",
+      database: process.env.DB_LOCATION
+        ? `${process.env.DB_LOCATION}/snapi-twitter-bot.db`
+        : "./snapi-twitter-bot.db",
       entities: [Tweet, NewsSite], // Manually add entities, it's just a few
       synchronize: true,
       logging: false,
@@ -43,7 +45,7 @@ async function main() {
       json: true,
       setup: (channel: ConfirmChannel) => {
         channel.consume("twitter.articles", (message) =>
-          handleMessage(message, channelWrapper)
+          handleMessage(message, channelWrapper, ArticleTypes.Article)
         );
       },
     });
