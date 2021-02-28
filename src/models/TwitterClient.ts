@@ -1,4 +1,4 @@
-import Twitter from "twitter";
+import Twitter, { ResponseData } from "twitter";
 import { ArticleTypes } from "../handlers/handleMessage";
 
 class TwitterClient {
@@ -14,14 +14,16 @@ class TwitterClient {
     title: string,
     newsSite: string,
     url: string
-  ): void {
+  ): Promise<ResponseData> | void {
     const tweetText = `New ${type} from ${newsSite}: ${title} - ${url} #space #spaceflight #news`;
+    if (process.env.DEBUG) {
+      return console.log("DEBUG!", tweetText);
+    }
     try {
-      // return this.client.post('statuses/update', {status: tweetText})
+      return this.client.post("statuses/update", { status: tweetText });
     } catch (e) {
       console.error(e);
     }
-    console.log(tweetText);
   }
 }
 

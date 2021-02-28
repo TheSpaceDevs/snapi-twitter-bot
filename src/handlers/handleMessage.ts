@@ -46,14 +46,18 @@ export const handleMessage = async (
         );
 
         // Save tweet to the database and ack the message to the broker
-        await tweetRepository.save(newTweet);
-        console.log(`Saved: "${newTweet.title}" to the database 👍`);
-        // channel.ack(message);
+        try {
+          await tweetRepository.save(newTweet);
+          console.log(`Saved: "${newTweet.title}" to the database 👍`);
+          channel.ack(message!);
+        } catch (e) {
+          console.error(e);
+        }
       }
     }
 
     // If we get here, that means the tweet was already found in the database, so we can delete the message
-    // channel.ack(message);
+    channel.ack(message!);
   } else {
     // We get here if the message didn't validate for some reason
     console.error(msg.validationErrors);
