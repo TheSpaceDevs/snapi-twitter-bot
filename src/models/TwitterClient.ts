@@ -16,13 +16,15 @@ class TwitterClient {
     url: string
   ): Promise<ResponseData> | void {
     const tweetText = `New ${type} from ${newsSite}: ${title} - ${url} #space #spaceflight #news`;
+
     if (process.env.DEBUG) {
       return console.log("DEBUG!", tweetText);
-    }
-    try {
-      return this.client.post("statuses/update", { status: tweetText });
-    } catch (e) {
-      console.error(e);
+    } else {
+      try {
+        return this.client.post("statuses/update", { status: tweetText });
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 }
