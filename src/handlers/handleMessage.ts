@@ -7,9 +7,16 @@ import { Message } from "../models/Message";
 import { Tweet } from "../entity/Tweet";
 import { NewsSite } from "../entity/NewsSite";
 
+export enum ArticleTypes {
+  "Article" = "article",
+  "Blog" = "blog",
+  "Report" = "report",
+}
+
 export const handleMessage = async (
   message: ConsumeMessage | null,
-  channel: ChannelWrapper
+  channel: ChannelWrapper,
+  type: ArticleTypes
 ): Promise<void> => {
   let tweetRepository = getRepository(Tweet);
   let newsSiteRepository = getRepository(NewsSite);
@@ -32,14 +39,14 @@ export const handleMessage = async (
 
         // Send tweet to Twitter
         twitterClient.sendTweet(
-          "article",
+          type,
           newTweet.title,
           newTweet.newsSite.name,
           newTweet.url
         );
 
         // Save tweet to the database and ack the message to the broker
-        // await tweetRepository.save(newTweet);
+        await tweetRepository.save(newTweet);
         console.log(`Saved: "${newTweet.title}" to the database 👍`);
         // channel.ack(message);
       }

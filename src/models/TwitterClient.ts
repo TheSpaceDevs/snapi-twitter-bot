@@ -1,4 +1,5 @@
 import Twitter from "twitter";
+import { ArticleTypes } from "../handlers/handleMessage";
 
 class TwitterClient {
   private client = new Twitter({
@@ -8,9 +9,18 @@ class TwitterClient {
     access_token_secret: process.env.ACCESS_TOKEN_SECRET ?? "",
   });
 
-  sendTweet(type: string, title: string, newsSite: string, url: string): void {
+  sendTweet(
+    type: ArticleTypes,
+    title: string,
+    newsSite: string,
+    url: string
+  ): void {
     const tweetText = `New ${type} from ${newsSite}: ${title} - ${url} #space #spaceflight #news`;
-    // return this.client.post('statuses/update', {status: tweetText})
+    try {
+      // return this.client.post('statuses/update', {status: tweetText})
+    } catch (e) {
+      console.error(e);
+    }
     console.log(tweetText);
   }
 }
