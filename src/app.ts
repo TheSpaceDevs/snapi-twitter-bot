@@ -47,6 +47,9 @@ async function main() {
         channel.consume("twitter.articles", (message) =>
           handleMessage(message, channelWrapper, ArticleTypes.Article)
         );
+        channel.consume("twitter.reports", (message) =>
+          handleMessage(message, channelWrapper, ArticleTypes.Report)
+        );
       },
     });
   } catch (e) {
