@@ -1,5 +1,5 @@
 import Twitter, { ResponseData } from "twitter";
-import { Types } from "./Enums";
+import { Tweet } from "../entity/Tweet";
 
 class TwitterClient {
   private client = new Twitter({
@@ -9,22 +9,13 @@ class TwitterClient {
     access_token_secret: process.env.ACCESS_TOKEN_SECRET ?? "",
   });
 
-  sendTweet(
-    type: Types,
-    title: string,
-    newsSite: string,
-    url: string
-  ): Promise<ResponseData> | void {
-    const tweetText = `New ${type} from ${newsSite}: ${title} - ${url} #space #spaceflight #news`;
+  sendTweet(tweet: Tweet): Promise<ResponseData> | void {
+    const tweetText = `New ${tweet.type} from ${tweet.newsSite}: ${tweet.title} - ${tweet.url} #space #spaceflight #news`;
 
     if (process.env.DEBUG) {
       return console.log("DEBUG!", tweetText);
     } else {
-      try {
-        return this.client.post("statuses/update", { status: tweetText });
-      } catch (e) {
-        console.error(e);
-      }
+      return this.client.post("statuses/update", { status: tweetText });
     }
   }
 }

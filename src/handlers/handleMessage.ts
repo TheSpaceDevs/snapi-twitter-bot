@@ -28,31 +28,26 @@ export const handleMessage = async (
       });
 
       if (newsSite) {
-        const newTweet = new Tweet(msg.title, newsSite, msg.url);
+        const newTweet = new Tweet(msg.title, msg.type, newsSite, msg.url);
 
-        // Send tweet to Twitter
-        twitterClient.sendTweet(
-          msg.type,
-          newTweet.title,
-          newTweet.newsSite.name,
-          newTweet.url
-        );
-
-        // Save tweet to the database and ack the message to the broker
         try {
+          // We try to save first to the database so that if that fails, the run stops and nothing is tweeted
           await tweetRepository.save(newTweet);
+          await twitterClient.sendTweet(newTweet);
           console.log(`Saved: "${newTweet.title}" to the database 👍`);
           channel.ack(message!);
         } catch (e) {
+          channel.nack(message!, false, true);
           console.error(e);
         }
       }
     }
 
     // If we get here, that means the tweet was already found in the database, so we can delete the message
-    channel.ack(message!);
+    channel.nack(message!, false, false);
   } else {
     // We get here if the message didn't validate for some reason
     console.error(msg.validationErrors);
+    channel.nack(message!, false, false);
   }
 };

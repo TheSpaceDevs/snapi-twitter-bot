@@ -10,6 +10,16 @@ import { ConsumeMessage } from "amqplib";
 
 import { Types } from "./Enums";
 
+interface IJsonMessage {
+  type: Types;
+  data: {
+    title: string;
+    url: string;
+    newsSite: number;
+    publishedAt: string;
+  };
+}
+
 // Takes the raw amqp message and sets the fields we need later in the app.
 // Exposes a validate() method to validate that all fields are correctly set.
 export class Message {
@@ -33,9 +43,9 @@ export class Message {
 
   constructor(message: ConsumeMessage | null) {
     if (message) {
-      const msg = JSON.parse(message.content.toString());
+      const msg: IJsonMessage = JSON.parse(message.content.toString());
 
-      this.type = msg.type;
+      this.type = Types[msg.type];
       this.title = msg.data.title;
       this.url = msg.data.url;
       this.newsSite = msg.data.newsSite;
