@@ -1,136 +1,218 @@
-[{
-  "_id": {
-    "$oid": "5f283fd15edb5025b04fb3e6"
+[
+  {
+    "id": 1,
+    "name": "TechCrunch",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.609751+00",
+    "updated_at": "2021-05-18 08:21:31.609751+00"
   },
-  "name": "NASA Spaceflight"
-},{
-  "_id": {
-    "$oid": "5f32ab48f6f5f1c262752abb"
+  {
+    "id": 2,
+    "name": "SpaceFlight Insider",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.631772+00",
+    "updated_at": "2021-05-18 08:21:31.631772+00"
   },
-  "name": "Arstechnica"
-},{
-  "_id": {
-    "$oid": "5f32ab56f6f5f1c262752abc"
+  {
+    "id": 3,
+    "name": "NASA Spaceflight",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.657971+00",
+    "updated_at": "2021-05-18 08:21:31.657971+00"
   },
-  "name": "Blue Origin"
-},{
-  "_id": {
-    "$oid": "5f32ab66f6f5f1c262752abd"
+  {
+    "id": 4,
+    "name": "SpaceX",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.678849+00",
+    "updated_at": "2021-05-18 08:21:31.678849+00"
   },
-  "name": "ElonX"
-},{
-  "_id": {
-    "$oid": "5f32ab7cf6f5f1c262752abe"
+  {
+    "id": 5,
+    "name": "ElonX",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.700722+00",
+    "updated_at": "2021-05-18 08:21:31.700722+00"
   },
-  "name": "ESA"
-},{
-  "_id": {
-    "$oid": "5f32ab7ff6f5f1c262752abf"
+  {
+    "id": 6,
+    "name": "Blue Origin",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.722487+00",
+    "updated_at": "2021-05-18 08:21:31.722487+00"
   },
-  "name": "NASA"
-},{
-  "_id": {
-    "$oid": "5f32ab90f6f5f1c262752ac0"
+  {
+    "id": 7,
+    "name": "Spaceflight Now",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.742892+00",
+    "updated_at": "2021-05-18 08:21:31.742892+00"
   },
-  "name": "National Geographic"
-},{
-  "_id": {
-    "$oid": "5f32ab99f6f5f1c262752ac1"
+  {
+    "id": 8,
+    "name": "Space.com",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.761079+00",
+    "updated_at": "2021-05-18 08:21:31.761079+00"
   },
-  "name": "Phys"
-},{
-  "_id": {
-    "$oid": "5f32aba7f6f5f1c262752ac2"
+  {
+    "id": 9,
+    "name": "Teslarati",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.782742+00",
+    "updated_at": "2021-05-18 08:21:31.782742+00"
   },
-  "name": "Space.com"
-},{
-  "_id": {
-    "$oid": "5f32abb6f6f5f1c262752ac3"
+  {
+    "id": 10,
+    "name": "Virgin Galactic",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.8006+00",
+    "updated_at": "2021-05-18 08:21:31.8006+00"
   },
-  "name": "SpaceFlight Insider"
-},{
-  "_id": {
-    "$oid": "5f32abcbf6f5f1c262752ac4"
+  {
+    "id": 11,
+    "name": "Planetary Society",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.822743+00",
+    "updated_at": "2021-05-18 08:21:31.822743+00"
   },
-  "name": "Spaceflight Now"
-},{
-  "_id": {
-    "$oid": "5f32abd7f6f5f1c262752ac5"
+  {
+    "id": 12,
+    "name": "Phys",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.846162+00",
+    "updated_at": "2021-05-18 08:21:31.846162+00"
   },
-  "name": "SpaceNews"
-},{
-  "_id": {
-    "$oid": "5f32abe3f6f5f1c262752ac6"
+  {
+    "id": 13,
+    "name": "National Space Society",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.868205+00",
+    "updated_at": "2021-05-18 08:21:31.868205+00"
   },
-  "name": "SpaceX"
-},{
-  "_id": {
-    "$oid": "5f32abfbf6f5f1c262752ac7"
+  {
+    "id": 14,
+    "name": "The Japan Times",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.886442+00",
+    "updated_at": "2021-05-18 08:21:31.886442+00"
   },
-  "name": "TechCrunch"
-},{
-  "_id": {
-    "$oid": "5f32ac02f6f5f1c262752ac8"
+  {
+    "id": 15,
+    "name": "National Geographic",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.906447+00",
+    "updated_at": "2021-05-18 08:21:31.906447+00"
   },
-  "name": "Teslarati"
-},{
-  "_id": {
-    "$oid": "5f32ac16f6f5f1c262752ac9"
+  {
+    "id": 16,
+    "name": "SpaceNews",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.927352+00",
+    "updated_at": "2021-05-18 08:21:31.927352+00"
   },
-  "name": "The Drive"
-},{
-  "_id": {
-    "$oid": "5f32ac3bf6f5f1c262752aca"
+  {
+    "id": 17,
+    "name": "The National",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.949494+00",
+    "updated_at": "2021-05-18 08:21:31.949494+00"
   },
-  "name": "The Japan Times"
-},{
-  "_id": {
-    "$oid": "5f32ac4bf6f5f1c262752acb"
+  {
+    "id": 18,
+    "name": "Jet Propulsion Laboratory",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.969004+00",
+    "updated_at": "2021-05-18 08:21:31.969004+00"
   },
-  "name": "The National"
-},{
-  "_id": {
-    "$oid": "5f32ac5af6f5f1c262752acc"
+  {
+    "id": 19,
+    "name": "NASA",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:31.990713+00",
+    "updated_at": "2021-05-18 08:21:31.990713+00"
   },
-  "name": "The Space Devs"
-},{
-  "_id": {
-    "$oid": "5f32ac66f6f5f1c262752acd"
+  {
+    "id": 20,
+    "name": "The Space Review",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:32.019258+00",
+    "updated_at": "2021-05-18 08:21:32.019258+00"
   },
-  "name": "The Space Review"
-},{
-  "_id": {
-    "$oid": "5f32ac76f6f5f1c262752ace"
+  {
+    "id": 21,
+    "name": "The Verge",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:32.039606+00",
+    "updated_at": "2021-05-18 08:21:32.039606+00"
   },
-  "name": "The Verge"
-},{
-  "_id": {
-    "$oid": "5f32ac81f6f5f1c262752acf"
+  {
+    "id": 22,
+    "name": "The Drive",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:32.057453+00",
+    "updated_at": "2021-05-18 08:21:32.057453+00"
   },
-  "name": "Virgin Galactic"
-},{
-  "_id": {
-    "$oid": "5f34041c16bd1b2b24d5172e"
+  {
+    "id": 23,
+    "name": "Arstechnica",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:32.077969+00",
+    "updated_at": "2021-05-18 08:21:32.077969+00"
   },
-  "name": "Planetary Society"
-},{
-  "_id": {
-    "$oid": "5f34047716bd1b2b24d5172f"
+  {
+    "id": 24,
+    "name": "ESA",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:32.098205+00",
+    "updated_at": "2021-05-18 08:21:32.098205+00"
   },
-  "name": "Jet Propulsion Laboratory"
-},{
-  "_id": {
-    "$oid": "5f3404f816bd1b2b24d51730"
+  {
+    "id": 25,
+    "name": "The Space Devs",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:32.118095+00",
+    "updated_at": "2021-05-18 08:21:32.118095+00"
   },
-  "name": "National Space Society"
-},{
-  "_id": {
-    "$oid": "60203949a45437001c9f7060"
+  {
+    "id": 26,
+    "name": "AmericaSpace",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:32.142865+00",
+    "updated_at": "2021-05-18 08:21:32.142865+00"
   },
-  "name": "AmericaSpace"
-},{
-  "_id": {
-    "$oid": "603d0f0b3a4653001c0121e6"
-  },
-  "name": "The Wall Street Journal"
-}]
+  {
+    "id": 27,
+    "name": "The Wall Street Journal",
+    "created_by": 1,
+    "updated_by": 1,
+    "created_at": "2021-05-18 08:21:32.162065+00",
+    "updated_at": "2021-05-18 08:21:32.162065+00"
+  }
+]

@@ -11,7 +11,7 @@ import { Tweet } from "./Tweet";
 
 export interface INewsSite {
   name: string;
-  newsSiteId: string;
+  newsSiteId: number;
   tweets?: Tweet[];
 }
 
@@ -25,7 +25,7 @@ export class NewsSite implements INewsSite {
   name: string;
 
   @Column()
-  newsSiteId: string;
+  newsSiteId: number;
 
   @OneToMany(() => Tweet, (tweet) => tweet.newsSite)
   tweets!: Tweet[]; // Using the postfix (!) since TypeORM will fill this
@@ -36,7 +36,7 @@ export class NewsSite implements INewsSite {
   @UpdateDateColumn()
   updatedAt!: Date; // Using the postfix (!) since the decorator will set it
 
-  constructor(name: string, newsSiteId: string) {
+  constructor(name: string, newsSiteId: number) {
     this.name = name;
     this.newsSiteId = newsSiteId;
   }

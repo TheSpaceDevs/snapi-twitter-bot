@@ -2,14 +2,21 @@ import {
   IsDate,
   IsDefined,
   IsUrl,
+  IsEnum,
   validate,
   ValidationError,
 } from "class-validator";
 import { ConsumeMessage } from "amqplib";
 
+import { Types } from "./Enums";
+
 // Takes the raw amqp message and sets the fields we need later in the app.
 // Exposes a validate() method to validate that all fields are correctly set.
 export class Message {
+  @IsDefined()
+  @IsEnum(Types)
+  type: Types = Types.article;
+
   @IsDefined()
   title: string = "";
 
@@ -17,7 +24,7 @@ export class Message {
   url: string = "";
 
   @IsDefined()
-  newsSite: string = "";
+  newsSite: number = 0;
 
   @IsDate()
   publishedAt: Date = new Date();
@@ -28,10 +35,11 @@ export class Message {
     if (message) {
       const msg = JSON.parse(message.content.toString());
 
-      this.title = msg.title;
-      this.url = msg.url;
-      this.newsSite = msg.newsSite;
-      this.publishedAt = new Date(msg.publishedAt);
+      this.type = msg.type;
+      this.title = msg.data.title;
+      this.url = msg.data.url;
+      this.newsSite = msg.data.newsSite;
+      this.publishedAt = new Date(msg.data.publishedAt);
     }
   }
 

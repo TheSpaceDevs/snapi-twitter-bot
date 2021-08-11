@@ -7,16 +7,9 @@ import { Message } from "../models/Message";
 import { Tweet } from "../entity/Tweet";
 import { NewsSite } from "../entity/NewsSite";
 
-export enum ArticleTypes {
-  "Article" = "article",
-  "Blog" = "blog",
-  "Report" = "report",
-}
-
 export const handleMessage = async (
   message: ConsumeMessage | null,
-  channel: ChannelWrapper,
-  type: ArticleTypes
+  channel: ChannelWrapper
 ): Promise<void> => {
   let tweetRepository = getRepository(Tweet);
   let newsSiteRepository = getRepository(NewsSite);
@@ -39,7 +32,7 @@ export const handleMessage = async (
 
         // Send tweet to Twitter
         twitterClient.sendTweet(
-          type,
+          msg.type,
           newTweet.title,
           newTweet.newsSite.name,
           newTweet.url

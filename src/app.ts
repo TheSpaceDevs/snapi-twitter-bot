@@ -3,9 +3,9 @@ import { ConfirmChannel } from "amqplib";
 import "reflect-metadata";
 import { createConnection, getRepository } from "typeorm";
 
+import { handleMessage } from "./handlers/handleMessage";
 import { Tweet } from "./entity/Tweet";
 import { NewsSite } from "./entity/NewsSite";
-import { ArticleTypes, handleMessage } from "./handlers/handleMessage";
 import newsSitesJson from "./news_sites.json";
 
 // Create a main function so we can use async/await
@@ -28,11 +28,11 @@ async function main() {
     // Import all sites from newsSites.json. This was dumped from the Spaceflight News API database
     for (const entry of newsSitesJson) {
       const site = await newsSiteRepository.findOne({
-        newsSiteId: entry._id["$oid"],
+        newsSiteId: entry.id,
       });
       if (!site) {
         console.log("adding:", entry.name);
-        let newsSite = new NewsSite(entry.name, entry._id["$oid"]);
+        let newsSite = new NewsSite(entry.name, entry.id);
         await newsSiteRepository.save(newsSite);
       }
     }
@@ -44,12 +44,13 @@ async function main() {
     const channelWrapper = connection.createChannel({
       json: true,
       setup: (channel: ConfirmChannel) => {
-        channel.consume("twitter.articles", (message) =>
-          handleMessage(message, channelWrapper, ArticleTypes.Article)
-        );
-        channel.consume("twitter.reports", (message) =>
-          handleMessage(message, channelWrapper, ArticleTypes.Report)
-        );
+        return Promise.all([
+          channel.assertQueue("twitter"),
+          channel.bindQueue("twitter", "importer", "*"),
+          channel.consume("twitter", (message) =>
+            handleMessage(message, channelWrapper)
+          ),
+        ]);
       },
     });
   } catch (e) {

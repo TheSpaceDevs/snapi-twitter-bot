@@ -1,5 +1,5 @@
 import Twitter, { ResponseData } from "twitter";
-import { ArticleTypes } from "../handlers/handleMessage";
+import { Types } from "./Enums";
 
 class TwitterClient {
   private client = new Twitter({
@@ -10,7 +10,7 @@ class TwitterClient {
   });
 
   sendTweet(
-    type: ArticleTypes,
+    type: Types,
     title: string,
     newsSite: string,
     url: string
