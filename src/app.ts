@@ -2,11 +2,17 @@ import amqp from "amqp-connection-manager";
 import { ConfirmChannel } from "amqplib";
 import "reflect-metadata";
 import { createConnection, getRepository } from "typeorm";
+import { init, captureException } from "@sentry/node";
 
 import { handleMessage } from "./handlers/handleMessage";
 import { Tweet } from "./entity/Tweet";
 import { NewsSite } from "./entity/NewsSite";
 import newsSitesJson from "./news_sites.json";
+
+// Initialize Sentry
+init({
+  dsn: process.env.SENTRY_DSN,
+});
 
 // Create a main function so we can use async/await
 async function main() {
@@ -54,6 +60,7 @@ async function main() {
       },
     });
   } catch (e) {
+    captureException(e);
     console.error(e);
   }
 }

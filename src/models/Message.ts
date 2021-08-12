@@ -8,7 +8,7 @@ import {
 } from "class-validator";
 import { ConsumeMessage } from "amqplib";
 
-import { Types } from "./Enums";
+import { Types } from "../utils/Enums";
 
 interface IJsonMessage {
   type: Types;

@@ -20,6 +20,8 @@
     "typescript": "^4.2.2"
   },
   "dependencies": {
+    "@sentry/node": "^6.11.0",
+    "@sentry/tracing": "^6.11.0",
     "amqp-connection-manager": "^3.2.2",
     "amqplib": "^0.8.0",
     "class-validator": "^0.13.1",
