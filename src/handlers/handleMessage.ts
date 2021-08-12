@@ -1,8 +1,9 @@
 import { ConsumeMessage } from "amqplib";
 import { ChannelWrapper } from "amqp-connection-manager";
 import { getRepository } from "typeorm";
+import Sentry from "@sentry/node";
 
-import { twitterClient } from "../models/TwitterClient";
+import { twitterClient } from "../utils/TwitterClient";
 import { Message } from "../models/Message";
 import { Tweet } from "../entity/Tweet";
 import { NewsSite } from "../entity/NewsSite";
@@ -38,6 +39,7 @@ export const handleMessage = async (
           channel.ack(message!);
         } catch (e) {
           channel.nack(message!, false, true);
+          Sentry.captureException(e);
           console.error(e);
         }
       }
@@ -47,7 +49,8 @@ export const handleMessage = async (
     channel.nack(message!, false, false);
   } else {
     // We get here if the message didn't validate for some reason
-    console.error(msg.validationErrors);
     channel.nack(message!, false, false);
+    Sentry.captureMessage(`Validation error for ${msg.title}`);
+    console.error(msg.validationErrors);
   }
 };

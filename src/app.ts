@@ -2,6 +2,7 @@ import amqp from "amqp-connection-manager";
 import { ConfirmChannel } from "amqplib";
 import "reflect-metadata";
 import { createConnection, getRepository } from "typeorm";
+import Sentry from "@sentry/node";
 
 import { handleMessage } from "./handlers/handleMessage";
 import { Tweet } from "./entity/Tweet";
@@ -10,6 +11,10 @@ import newsSitesJson from "./news_sites.json";
 
 // Create a main function so we can use async/await
 async function main() {
+  Sentry.init({
+    dsn: process.env.SENTRY_DSN,
+  });
+
   try {
     // Connect to the database
     await createConnection({

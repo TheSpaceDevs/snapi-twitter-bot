@@ -10,7 +10,7 @@ class TwitterClient {
   });
 
   sendTweet(tweet: Tweet): Promise<ResponseData> | void {
-    const tweetText = `New ${tweet.type} from ${tweet.newsSite}: ${tweet.title} - ${tweet.url} #space #spaceflight #news`;
+    const tweetText = `New ${tweet.type} from ${tweet.newsSite.name}: ${tweet.title} - ${tweet.url} #space #spaceflight #news`;
 
     if (process.env.DEBUG) {
       return console.log("DEBUG!", tweetText);

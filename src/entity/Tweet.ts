@@ -7,7 +7,7 @@ import {
   ManyToOne,
 } from "typeorm";
 import { NewsSite } from "./NewsSite";
-import { Types } from "../models/Enums";
+import { Types } from "../utils/Enums";
 
 export interface ITweet {
   title: string;
