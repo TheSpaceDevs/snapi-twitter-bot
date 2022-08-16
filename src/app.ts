@@ -13,10 +13,10 @@ init({
   dsn: process.env.SENTRY_DSN,
 });
 
-// Create a main function so we can use async/await
+// Create a main function, so we can use async/await
 async function main() {
   try {
-    // Setup the database
+    // Set up the database
     await AppDataSource.initialize()
 
 
