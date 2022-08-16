@@ -1,8 +1,8 @@
 import { ConsumeMessage } from "amqplib";
 import { ChannelWrapper } from "amqp-connection-manager";
-import { getRepository } from "typeorm";
 import { captureException, captureMessage } from "@sentry/node";
 
+import { AppDataSource } from "../database";
 import { twitterClient } from "../utils/TwitterClient";
 import { Message } from "../models/Message";
 import { Tweet } from "../entity/Tweet";
@@ -12,19 +12,17 @@ export const handleMessage = async (
   message: ConsumeMessage | null,
   channel: ChannelWrapper
 ): Promise<void> => {
-  let tweetRepository = getRepository(Tweet);
-  let newsSiteRepository = getRepository(NewsSite);
 
   const msg = new Message(message);
   const validMessage = await msg.validate();
 
   if (validMessage) {
     // Check if we already have this message, based on the title
-    const tweet = await tweetRepository.findOne({ title: msg.title });
+    const tweet = await AppDataSource.manager.findOneBy(Tweet, { title: msg.title });
 
     if (!tweet) {
       // We need to get the news site that's needed to pass to the tweet entity
-      const newsSite = await newsSiteRepository.findOne({
+      const newsSite = await AppDataSource.manager.findOneBy(NewsSite, {
         newsSiteId: msg.newsSite,
       });
 
@@ -33,7 +31,7 @@ export const handleMessage = async (
 
         try {
           // We try to save first to the database so that if that fails, the run stops and nothing is tweeted
-          await tweetRepository.save(newTweet);
+          await AppDataSource.manager.save(newTweet);
           await twitterClient.sendTweet(newTweet);
           console.log(`Saved: "${newTweet.title}" to the database 👍`);
           channel.ack(message!);

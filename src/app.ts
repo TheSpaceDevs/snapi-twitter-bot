@@ -1,13 +1,12 @@
 import amqp from "amqp-connection-manager";
 import { ConfirmChannel } from "amqplib";
 import "reflect-metadata";
-import { createConnection, getRepository } from "typeorm";
-import { init, captureException } from "@sentry/node";
+import { captureException, init } from "@sentry/node";
 
 import { handleMessage } from "./handlers/handleMessage";
-import { Tweet } from "./entity/Tweet";
 import { NewsSite } from "./entity/NewsSite";
 import newsSitesJson from "./news_sites.json";
+import { AppDataSource } from "./database";
 
 // Initialize Sentry
 init({
@@ -17,29 +16,19 @@ init({
 // Create a main function so we can use async/await
 async function main() {
   try {
-    // Connect to the database
-    await createConnection({
-      type: "sqlite",
-      database: process.env.DB_LOCATION
-        ? `${process.env.DB_LOCATION}/snapi-twitter-bot.db`
-        : "./snapi-twitter-bot.db",
-      entities: [Tweet, NewsSite], // Manually add entities, it's just a few
-      synchronize: true,
-      logging: false,
-    });
+    // Setup the database
+    await AppDataSource.initialize()
 
-    // Setup a newsRepository to handle news stuff here
-    let newsSiteRepository = getRepository(NewsSite);
 
     // Import all sites from newsSites.json. This was dumped from the Spaceflight News API database
     for (const entry of newsSitesJson) {
-      const site = await newsSiteRepository.findOne({
+      const site = await AppDataSource.manager.findOneBy(NewsSite, {
         newsSiteId: entry.id,
       });
       if (!site) {
         console.log("adding:", entry.name);
         let newsSite = new NewsSite(entry.name, entry.id);
-        await newsSiteRepository.save(newsSite);
+        await AppDataSource.manager.save(newsSite);
       }
     }
 
