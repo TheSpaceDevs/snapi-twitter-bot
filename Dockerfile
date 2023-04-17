@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-LABEL org.opencontainers.image.source https://github.com/TheSpaceDevs/snapi-twitter-bot
+LABEL org.opencontainers.image.source https://github.com/spaceflightnewsapi/snapi-twitter-bot
 
 WORKDIR /usr/src/app
 

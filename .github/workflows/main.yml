@@ -16,7 +16,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/TheSpaceDevs/spaceflightnewsapi
+            ghcr.io/spaceflightnewsapi/spaceflightnewsapi
           tags: |
             type=ref,event=tag
 
