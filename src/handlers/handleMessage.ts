@@ -3,7 +3,7 @@ import { ChannelWrapper } from "amqp-connection-manager";
 import { captureException, captureMessage } from "@sentry/node";
 
 import { AppDataSource } from "../database";
-import { twitterClient } from "../utils/TwitterClient";
+import {twitterClientV2} from "../utils/TwitterClientV2";
 import { Message } from "../models/Message";
 import { Tweet } from "../entity/Tweet";
 import { NewsSite } from "../entity/NewsSite";
@@ -32,7 +32,7 @@ export const handleMessage = async (
         try {
           // We try to save first to the database so that if that fails, the run stops and nothing is tweeted
           await AppDataSource.manager.save(newTweet);
-          await twitterClient.sendTweet(newTweet);
+          await twitterClientV2.sendTweet(newTweet);
           console.log(`Saved: "${newTweet.title}" to the database 👍`);
           channel.ack(message!);
         } catch (e) {
