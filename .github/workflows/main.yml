@@ -16,7 +16,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/spaceflightnewsapi/spaceflightnewsapi
+            ghcr.io/TheSpaceDevs/snapi-twitter-bot
           tags: |
             type=ref,event=tag
 
