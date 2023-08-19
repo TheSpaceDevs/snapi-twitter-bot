@@ -13,23 +13,23 @@
   "license": "ISC",
   "devDependencies": {
     "@types/amqp-connection-manager": "^2.0.12",
-    "@types/node": "^18.15.11",
-    "nodemon": "^2.0.22",
+    "@types/node": "^20.5.1",
+    "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.5"
+    "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@sentry/node": "^7.48.0",
-    "@sentry/tracing": "^7.48.0",
-    "amqp-connection-manager": "^4.1.12",
+    "@sentry/node": "^7.64.0",
+    "@sentry/tracing": "^7.64.0",
+    "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",
     "class-validator": "^0.14.0",
-    "dotenv": "^16.0.3",
-    "prettier": "^2.8.7",
+    "dotenv": "^16.3.1",
+    "prettier": "^3.0.2",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^3.0.2",
+    "rimraf": "^5.0.1",
     "sqlite3": "^5.1.6",
-    "twitter-api-v2": "^1.14.2",
-    "typeorm": "^0.3.14"
+    "twitter-api-v2": "^1.15.1",
+    "typeorm": "^0.3.17"
   }
 }
