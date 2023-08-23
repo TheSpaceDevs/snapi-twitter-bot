@@ -1,6 +1,6 @@
 {
   "name": "snapi-twitter-bot",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "The official Twitter bot for the Spaceflight News API.",
   "main": "app.js",
   "scripts": {

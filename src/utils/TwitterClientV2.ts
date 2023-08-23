@@ -4,13 +4,13 @@ import {Tweet} from "../entity/Tweet";
 class TwitterClientV2 {
     private client: TwitterApiReadWrite
 
-    constructor(bearerToken?: string) {
-        // Proccess.env.BEARER_TOKEN can be empty, so we need to check for that.
-        if (!bearerToken) {
-            throw new Error("No bearer token provided");
-        }
-
-        this.client = new TwitterApi(bearerToken).readWrite;
+    constructor(apiKey: string, apiSecret: string, accessToken: string, accessTokenSecret: string) {
+        this.client = new TwitterApi({
+            appKey: apiKey,
+            appSecret: apiSecret,
+            accessToken: accessToken,
+            accessSecret: accessTokenSecret,
+        }).readWrite;
     }
 
     async sendTweet(tweet: Tweet): Promise<TweetV2PostTweetResult | void> {
@@ -24,4 +24,4 @@ class TwitterClientV2 {
     }
 }
 
-export const twitterClientV2: TwitterClientV2 = new TwitterClientV2(process.env.BEARER_TOKEN);
+export const twitterClientV2: TwitterClientV2 = new TwitterClientV2(process.env.API_KEY!, process.env.API_SECRET!, process.env.ACCESS_TOKEN!, process.env.ACCESS_TOKEN_SECRET!);
